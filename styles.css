@@ -1,36 +1,67 @@
-/* Estilo Global*/
+/* Estilo Global */
+:root {
+  --primary-color: #ffdf00;
+  --secondary-color: #009c3b;
+  --text-color: #fff;
+  --bg-dark: #000;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: 10px;
+  --font-main: 'Ysabeau Infant', sans-serif;
+  --font-secondary: 'Montserrat', sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Ysabeau Infant', sans-serif;
+  font-family: var(--font-main);
 }
 
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* Seção Banner */
 .secao-banner {
   width: 100%;
-  height: 100vh;
-
+  min-height: 100vh;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 .secao-banner video {
   position: absolute;
-  z-index: -1;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
 }
 
 .container-info {
-  width: 768px;
-  padding: 0 20px;
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 40px;
+  justify-content: center;
+  gap: 30px;
+  
+  /* Glassmorphism */
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Estilo da imagem de perfil e do titulo */
@@ -39,163 +70,426 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  text-align: center;
 }
 
 .imgPerfil {
-  width: 200px;
-  height: 200px;
-  border-radius: 100%;
-
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   background-image: url('./assets/neymar.jpg');
   background-position: center;
   background-size: cover;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(255, 223, 0, 0.5);
+  transition: transform 0.3s ease;
 }
 
-.imgPerfil::before {
-  content: "";
-  position: absolute;
-  width: 215px;
-  height: 215px;
-  background: linear-gradient(90deg, #ffdf00, #009c3b);
-  z-index: -1;
-  border-radius: 100%;
+.imgPerfil:hover {
+  transform: scale(1.05);
 }
 
 .imgPerfil-titulo h1 {
   position: relative;
-  font-size: 50px;
-  color: #fff;
-  text-shadow: 2px 6px 3px #000000;
-}
-
-h1::before {
-  content: "";
-  position: absolute;
-  width: 55px;
-  height: 5px;
-  background: linear-gradient(90deg, #ffdf00, #009c3b);
-  bottom: 2px;
-  left: 5px;
-  border-radius: 4px;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
 }
 
 .imgPerfil-titulo h1::after {
   content: "";
-  position: absolute;
-  bottom: 12px;
-  right: -20px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
   background-image: url(./assets/verificado.png);
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
 }
-
 
 /* Estilo dos links */
 .arvore-links {
-  max-width: 768px;
   width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .arvore-links a {
   width: 100%;
-  padding: 10px;
-
+  padding: 15px 20px;
   display: flex;
   align-items: center;
-  gap: 5px;
-
-  font-size: 20px;
+  justify-content: center; /* Center content */
+  gap: 15px;
+  font-size: 1.1rem;
   font-weight: 600;
   text-decoration: none;
-  text-align: center;
-
-  border-radius: 20px;
-  background-color: #0200006e;
-  color: #fff;
-}
-
-.arvore-links a:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-.arvore-links a p {
-  width: 90%;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--text-color);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .arvore-links a img {
-  width: 30px;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.arvore-links a:hover {
+  background-color: var(--text-color);
+  color: var(--bg-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
 /* Estilo da tabela */
 .secao-tabela {
   position: relative;
   width: 100%;
-  height: 100vh;
-  text-align: center;
-
+  min-height: 100vh;
+  padding: 60px 20px;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: 40px;
-  font-family: 'Monstserrat', sans-serif;
-
+  font-family: var(--font-secondary);
   background-image: url(./assets/imagem-de-fundo.jpg);
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
 }
 
-.secao-tabela h2 {
-  font-size: 74px;
-  color: #fff;
-  text-shadow: 3px 6px 1px #000000;
+.secao-tabela::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 0;
 }
 
+.secao-tabela h2, .secao-tabela .table-responsive {
+  position: relative;
+  z-index: 1;
+}
+
+.secao-tabela h2 {
+  font-size: 3rem;
+  color: var(--text-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.table-responsive {
+  width: 100%;
+  max-width: 1000px;
+  overflow-x: auto;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  
+  /* Glassmorphism for table container */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Ensure table doesn't squish too much */
+}
 
 .tabela th {
-  font-size: 26px;
-  background-color: #000000cc;
-  color: #ffff;
-  text-shadow: 2px 2px 1px #000000;
+  padding: 20px;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.tabela th, tr, td {
-  padding: 20px;
+.tabela td {
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabela tbody tr {
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s;
+}
+
+.tabela tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .tabela td img {
   width: 30px;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
-.tabela tbody td:nth-child(1) {
+.tabela tbody td:first-child {
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* Align team names to left */
   gap: 10px;
+  text-align: left;
 }
 
-.tabela tbody tr:nth-of-type(odd) {
-  background-color: #ffffffcc;
-  font-weight: 700;
-  font-size: 18px;
-  color: #000000;
+/* Media Queries */
+@media (max-width: 768px) {
+  .imgPerfil {
+    width: 120px;
+    height: 120px;
+  }
+
+  .imgPerfil-titulo h1 {
+    font-size: 2rem;
+  }
+
+  .secao-tabela h2 {
+    font-size: 2.5rem;
+  }
+  
+  
 }
 
-.tabela tbody tr:nth-of-type(even) {
-  background-color: #000000cc;
-  font-weight: 700;
-  font-size: 18px;
-  color: #fff;
+.imgPerfil {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-image: url('./assets/neymar.jpg');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(255, 223, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.imgPerfil:hover {
+  transform: scale(1.05);
+}
+
+.imgPerfil-titulo h1 {
+  position: relative;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
+.imgPerfil-titulo h1::after {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(./assets/verificado.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* Estilo dos links */
+.arvore-links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.arvore-links a {
+  width: 100%;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content */
+  gap: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--text-color);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.arvore-links a img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.arvore-links a:hover {
+  background-color: var(--text-color);
+  color: var(--bg-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Estilo da tabela */
+.secao-tabela {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  font-family: var(--font-secondary);
+  background-image: url(./assets/imagem-de-fundo.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.secao-tabela::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
+
+.secao-tabela h2, .secao-tabela .table-responsive {
+  position: relative;
+  z-index: 1;
+}
+
+.secao-tabela h2 {
+  font-size: 3rem;
+  color: var(--text-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.table-responsive {
+  width: 100%;
+  max-width: 1000px;
+  overflow-x: auto;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  
+  /* Glassmorphism for table container */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Ensure table doesn't squish too much */
+}
+
+.tabela th {
+  padding: 20px;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tabela td {
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabela tbody tr {
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s;
+}
+
+.tabela tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tabela td img {
+  width: 30px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.tabela tbody td:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align team names to left */
+  gap: 10px;
+  text-align: left;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .imgPerfil {
+    width: 120px;
+    height: 120px;
+  }
+
+  .imgPerfil-titulo h1 {
+    font-size: 2rem;
+  }
+
+  .secao-tabela h2 {
+    font-size: 2.5rem;
+  }
+  
+  .container-info {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .imgPerfil-titulo h1 {
+    font-size: 1.8rem;
+  }
+  
+  .arvore-links a {
+    font-size: 1rem;
+    padding: 12px;
+  }
+  
+  .secao-tabela h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Rodapé */
+footer {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: var(--text-color);
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid var(--glass-border);
 }
